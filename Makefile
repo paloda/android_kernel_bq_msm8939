@@ -377,8 +377,12 @@ KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common \
 		   -Werror-implicit-function-declaration \
+		   -Wno-unused-const-variable \
 		   -Wno-format-security \
-		   -fno-delete-null-pointer-checks
+		   -Wno-error=unused-const-variable \
+		   -fno-delete-null-pointer-checks \
+		   -std=gnu89
+
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
 KBUILD_AFLAGS   := -D__ASSEMBLY__
