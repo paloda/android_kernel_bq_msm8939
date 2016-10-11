@@ -111,7 +111,7 @@
 					<0 0 2 4 16>,
 					<0 1 2 4 7>,
 					<2 0 2 4 9>,
-					<2 0 2 4 16>;
+					<2 0 2 4 16>,
 					<3 1 2 4 5>;
 		qcom,cpr-quot-adjust-scaling-factor-max = <650>;
 		qcom,cpr-enable;
