@@ -167,10 +167,9 @@ static void msm_actuator_parse_i2c_params(struct msm_actuator_ctrl_t *a_ctrl,
 				macro_code = 1023 - macro_adj_otp;
 			}
 			pos_value = (next_lens_position*((macro_code+macro_adj_otp)-(inf_code-inf_adj_otp))/1024+(inf_code-inf_adj_otp));
+		
+
                         value = (pos_value <<
-#else
-                        value = (next_lens_position <<
-#endif
                                 write_arr[i].data_shift) |
                                 ((hw_dword & write_arr[i].hw_mask) >>
                                 write_arr[i].hw_shift);
@@ -179,13 +178,9 @@ static void msm_actuator_parse_i2c_params(struct msm_actuator_ctrl_t *a_ctrl,
                                 i2c_byte1 = write_arr[i].reg_addr;
                                 i2c_byte2 = value;
                                 if (size != (i+1)) {
-#ifdef CONFIG_VEGETALTE_COMMON
-                                        i2c_byte2 = (value & 0xFF00) >> 8;
-#else
-                                        i2c_byte2 = (value & 0x300)>>8;
-#endif
-                                        CDBG("byte1:0x%x, byte2:0x%x\n",
-                                                i2c_byte1, i2c_byte2);
+					i2c_byte2 = (value & 0xFF00) >> 8;
+                                     //   CDBG("lj byte1:0x%x, byte2:0x%x\n",
+                                       //         i2c_byte1, i2c_byte2);
                                         i2c_tbl[a_ctrl->i2c_tbl_index].
                                                 reg_addr = i2c_byte1;
                                         i2c_tbl[a_ctrl->i2c_tbl_index].
@@ -197,11 +192,10 @@ static void msm_actuator_parse_i2c_params(struct msm_actuator_ctrl_t *a_ctrl,
                                         i2c_byte1 = write_arr[i].reg_addr;
                                         i2c_byte2 = (value & 0xFF);
                                 }
-#ifdef CONFIG_VEGETALTE_COMMON
+				//CDBG("lj --GPG--byte1:0x%x, byte2:0x%x, value:%d\n",i2c_byte1, i2c_byte2,value);
 			} else {
 				i2c_byte1 = (value & 0xFF00) >> 8;
 				i2c_byte2 = value & 0xFF;
-#endif
 			}
 #endif
 		} else {
